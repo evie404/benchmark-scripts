@@ -16,8 +16,13 @@
 filename=`echo "$1" | tr " " _`
 filename="${filename,,}".md
 
-volume=`dirname "$PWD"`
-device=`df $volume | tail -1 | awk '{ print $1 }'`
+device=`echo "$2" | tr " " _`
+if [ -z "$device" ]
+then
+	echo "Parsing device from command line..."
+	volume=`dirname "$PWD"`
+	device=`df $volume | tail -1 | awk '{ print $1 }'`
+fi
 
 echo "Running with filename=${filename}"
 echo "Running with volume=${volume}"
