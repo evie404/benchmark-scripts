@@ -36,3 +36,9 @@ echo
 cat /proc/mdstat
 echo
 echo "=== RAID Info End ==="
+echo
+echo "=== Partiton Info Start ==="
+echo
+df -Th
+echo
+echo "=== Partiton Info End ==="
