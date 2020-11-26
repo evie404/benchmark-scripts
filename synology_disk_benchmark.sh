@@ -40,8 +40,33 @@ function 5times {
 }
 
 function dd_read_tests {
+	# read from test file, read 1 GiB each time, read 2 times, total read 2 GiB
+	5times dd if=test of=/dev/null bs=1G count=2
+
+	echo
+
+	# read from test file, read 128 MiB each time, read 8 times, total read 1 GiB
+	5times dd if=test of=/dev/null bs=128M count=8
+
+	echo
+
 	# read from test file, read 1 MiB each time, read 1024 times, total read 1 GiB
 	5times dd if=test of=/dev/null bs=1M count=1024
+
+	echo
+
+	# read from test file, read 128 KiB each time, read 1024 times, total read 128 MiB
+	5times dd if=test of=/dev/null bs=128k count=1024
+
+	echo
+
+	# read from test file, read 4 KiB each time, read 1024 times, total read 4 MiB
+	5times dd if=test of=/dev/null bs=4k count=1024
+
+	echo
+
+	# read from test file, read 512 bytes each time, read 1024 times, total read 512 KiB
+	5times dd if=test of=/dev/null bs=512 count=1024
 }
 
 function dd_write_tests {
