@@ -10,6 +10,7 @@
 #
 # =======================================================================================
 
+# get the device of the current volume
 volume=$(dirname "$PWD")
 device=$(df $volume | tail -1 | awk '{ print $1 }')
 
@@ -48,6 +49,7 @@ dd if=/dev/zero of=test bs=4k count=1024 oflag=dsync
 # write 0 to test file, write 512 bytes each time, write 1024 times, total write 512 KiB
 dd if=/dev/zero of=test bs=512 count=1024 oflag=dsync
 
+# run fio tests
 fio xfio.conf
 
 rm test
