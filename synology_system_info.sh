@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+function meminfo {
+	mem_info_tmp_file=$(mktemp)
+	sudo dmidecode --type memory >${mem_info_tmp_file}
+	cat ${mem_info_tmp_file} | grep "Manufacturer" | sed -e 's/^[[:space:]]*//'
+	cat ${mem_info_tmp_file} | grep "Part Number" | sed -e 's/^[[:space:]]*//'
+	cat ${mem_info_tmp_file} | grep "Size" | sed -e 's/^[[:space:]]*//'
+}
+
 echo "=== Synology System Info Start ==="
 echo
 cat /etc/synoinfo.conf | grep upnpmodelname
@@ -10,11 +18,8 @@ echo "=== Synology System Info End ==="
 echo
 echo "=== Memory Info Start ==="
 echo
-mem_info_tmp_file=$(mktemp)
-sudo dmidecode --type memory >${mem_info_tmp_file}
-cat ${mem_info_tmp_file} | grep "Manufacturer" | sed -e 's/^[[:space:]]*//'
-cat ${mem_info_tmp_file} | grep "Part Number" | sed -e 's/^[[:space:]]*//'
-cat ${mem_info_tmp_file} | grep "Size" | sed -e 's/^[[:space:]]*//'
+cat /proc/meminfo | grep MemTotal
+command -v dmidecode >/dev/null && meminfo || echo "dmidecode not found. skipping detailed memory info"
 echo
 echo "=== Memory Info End ==="
 echo
