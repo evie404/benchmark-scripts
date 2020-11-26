@@ -40,8 +40,10 @@ function 5times {
 # test read/cached read timings
 5times sudo hdparm -Tt $device
 
+echo
+
 # create a 1 GiB test file with random data (it can take minutes)
-openssl rand -out test $(echo 1G | numfmt --from=iec)
+time openssl rand -out test $(echo 1G | numfmt --from=iec)
 
 # read from test file, read 1 MiB each time, read 1024 times, total read 1 GiB
 5times dd if=test of=/dev/null bs=1M count=1024
