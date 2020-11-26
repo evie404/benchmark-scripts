@@ -31,6 +31,10 @@ echo "Running with device=${device}"
 echo $@
 echo $@ > $filename
 
+system_info=$(./synology_system_info.sh)
+echo "${system_info}"
+echo "${system_info}" >> $filename
+
 #########################################################################################
 
 exec () {
