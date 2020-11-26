@@ -62,8 +62,7 @@ exec "$cmd"
 
 read -r -d '' cmd << EOM
 # create a 1 GiB test file with random data (it can take minutes)
-size=$( echo 1G | numfmt --from=iec )
-openssl rand -out test "$size"
+openssl rand -out test $(echo 1G | numfmt --from=iec)
 # clear cache
 sync; echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
 # read from test file, read 1 MiB each time, read 1024 times, total read 1 GiB
