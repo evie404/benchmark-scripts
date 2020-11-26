@@ -28,6 +28,15 @@ for f in /dev/sata?; do
 	cat ${hdd_info_tmp_file} | grep "User Capacity"
 	cat ${hdd_info_tmp_file} | grep "Rotation Rate"
 done
+for f in /dev/sdb*; do
+	echo
+	hdd_info_tmp_file=$(mktemp)
+	sudo smartctl -a ${f} >${hdd_info_tmp_file}
+	cat ${hdd_info_tmp_file} | grep "Vendor"
+	cat ${hdd_info_tmp_file} | grep "Product"
+	cat ${hdd_info_tmp_file} | grep "User Capacity"
+	cat ${hdd_info_tmp_file} | grep "Rotation Rate"
+done
 echo
 echo "=== HDD Info End ==="
 echo
