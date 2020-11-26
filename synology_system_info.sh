@@ -10,19 +10,21 @@ echo "=== Synology System Info End ==="
 echo
 echo "=== Memory Info Start ==="
 echo
-echo $(sudo dmidecode --type memory | grep "Manufacturer" | sed -e 's/^[[:space:]]*//')
-echo $(sudo dmidecode --type memory | grep "Part Number" | sed -e 's/^[[:space:]]*//')
-echo $(sudo dmidecode --type memory | grep "Size" | sed -e 's/^[[:space:]]*//')
+mem_info=$(sudo dmidecode --type memory)
+echo $(echo ${mem_info} | grep "Manufacturer" | sed -e 's/^[[:space:]]*//')
+echo $(echo ${mem_info} | grep "Part Number" | sed -e 's/^[[:space:]]*//')
+echo $(echo ${mem_info} | grep "Size" | sed -e 's/^[[:space:]]*//')
 echo
 echo "=== Memory Info End ==="
 echo
 echo "=== HDD Info Start ==="
 for f in /dev/sata?; do
 	echo
-  echo $(sudo smartctl -a $f | grep "Vendor")
-	echo $(sudo smartctl -a $f | grep "Product")
-	echo $(sudo smartctl -a $f | grep "User Capacity")
-	echo $(sudo smartctl -a $f | grep "Rotation Rate")
+	hdd_info=$(sudo smartctl -a $f)
+  echo $(echo ${hdd_info} | grep "Vendor")
+	echo $(echo ${hdd_info} | grep "Product")
+	echo $(echo ${hdd_info} | grep "User Capacity")
+	echo $(echo ${hdd_info} | grep "Rotation Rate")
 done
 echo
 echo "=== HDD Info End ==="
