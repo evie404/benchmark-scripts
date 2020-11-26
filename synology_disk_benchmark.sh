@@ -15,6 +15,10 @@ volume=$(dirname "$PWD")
 device=$(df $volume | tail -1 | awk '{ print $1 }')
 
 echo "Running with device=${device}"
+echo "Script version: $(git rev-parse HEAD)"
+echo "hdparm version: $(hdparm -V)"
+echo "dd version: $(dd --version | grep dd)"
+echo "fio version: $(fio --version)"
 
 ./synology_system_info.sh
 
