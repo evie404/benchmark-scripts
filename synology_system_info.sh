@@ -30,3 +30,9 @@ for f in /dev/sata?; do
 done
 echo
 echo "=== HDD Info End ==="
+echo
+echo "=== RAID Info Start ==="
+echo
+cat /proc/mdstat
+echo
+echo "=== RAID Info End ==="
