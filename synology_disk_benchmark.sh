@@ -19,6 +19,10 @@ filename="${filename,,}".md
 volume=`dirname "$PWD"`
 device=`df $volume | tail -1 | awk '{ print $1 }'`
 
+echo "Running with filename=${filename}"
+echo "Running with volume=${volume}"
+echo "Running with device=${device}"
+
 echo $@
 echo $@ > $filename
 
