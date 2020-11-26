@@ -10,21 +10,23 @@ echo "=== Synology System Info End ==="
 echo
 echo "=== Memory Info Start ==="
 echo
-mem_info=$(sudo dmidecode --type memory)
-echo $(echo -e ${mem_info} | grep "Manufacturer" | sed -e 's/^[[:space:]]*//')
-echo $(echo -e ${mem_info} | grep "Part Number" | sed -e 's/^[[:space:]]*//')
-echo $(echo -e ${mem_info} | grep "Size" | sed -e 's/^[[:space:]]*//')
+mem_info_tmp_file=$(mktemp)
+sudo dmidecode --type memory > mem_info_tmp_file
+echo $(cat ${mem_info_tmp_file} | grep "Manufacturer" | sed -e 's/^[[:space:]]*//')
+echo $(cat ${mem_info_tmp_file} | grep "Part Number" | sed -e 's/^[[:space:]]*//')
+echo $(cat ${mem_info_tmp_file} | grep "Size" | sed -e 's/^[[:space:]]*//')
 echo
 echo "=== Memory Info End ==="
 echo
 echo "=== HDD Info Start ==="
 for f in /dev/sata?; do
 	echo
-	hdd_info=$(sudo smartctl -a $f)
-	echo $(echo -e ${hdd_info} | grep "Vendor")
-	echo $(echo -e ${hdd_info} | grep "Product")
-	echo $(echo -e ${hdd_info} | grep "User Capacity")
-	echo $(echo -e ${hdd_info} | grep "Rotation Rate")
+	hdd_info_tmp_file=$(mktemp)
+	sudo smartctl -a ${f} > hdd_info_tmp_file
+	echo $(cat ${hdd_info_tmp_file} | grep "Vendor")
+	echo $(cat ${hdd_info_tmp_file} | grep "Product")
+	echo $(cat ${hdd_info_tmp_file} | grep "User Capacity")
+	echo $(cat ${hdd_info_tmp_file} | grep "Rotation Rate")
 done
 echo
 echo "=== HDD Info End ==="
