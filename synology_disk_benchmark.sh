@@ -28,6 +28,9 @@ echo "fio version: $(fio --version)"
 
 echo
 
+# record the commands run
+set -o xtrace
+
 function clear_cache {
 	sync
 	echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null
