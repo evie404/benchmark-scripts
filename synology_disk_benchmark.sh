@@ -8,6 +8,10 @@
 #
 # sudo ./synology_disk_benchmark.sh
 #
+# Optionally save the output file with tee:
+#
+# sudo ./synology_disk_benchmark.sh | tee output.log
+#
 # =======================================================================================
 
 # get the device of the current volume
