@@ -10,8 +10,8 @@
 #
 # =======================================================================================
 
-volume=`dirname "$PWD"`
-device=`df $volume | tail -1 | awk '{ print $1 }'`
+volume=$(dirname "$PWD")
+device=$(df $volume | tail -1 | awk '{ print $1 }')
 
 echo "Running with device=${device}"
 
@@ -24,7 +24,8 @@ sudo hdparm -Tt $device
 openssl rand -out test $(echo 1G | numfmt --from=iec)
 
 # clear cache
-sync; echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
+sync
+echo 3 | sudo tee /proc/sys/vm/drop_caches >/dev/null
 
 # read from test file, read 1 MiB each time, read 1024 times, total read 1 GiB
 dd if=test of=/dev/null bs=1M count=1024
