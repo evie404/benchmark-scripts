@@ -10,7 +10,7 @@
 #
 # Optionally save the output file with tee:
 #
-# sudo ./synology_disk_benchmark.sh | tee output.log
+# sudo ./synology_disk_benchmark.sh 2>&1 | tee output.log
 #
 # =======================================================================================
 
