@@ -38,8 +38,8 @@ function clear_cache {
 function 5times {
 	clear_cache
 
-	for i in {1..5}
-		do $*
+	for i in {1..5}; do
+		$*
 	done
 }
 
