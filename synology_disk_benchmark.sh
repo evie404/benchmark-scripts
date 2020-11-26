@@ -13,7 +13,7 @@
 #
 # =======================================================================================
 
-filename=`echo "$@" | tr " " _`
+filename=`echo "$1" | tr " " _`
 filename="${filename,,}".md
 
 volume=`dirname "$PWD"`
