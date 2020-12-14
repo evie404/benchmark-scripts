@@ -117,7 +117,11 @@ function hdparm_read_timings {
 
 cleanup
 
-5times hdparm_read_timings
+if df | awk '{print $1}' | grep $(pwd); then
+	# if drive, do read timings
+	5times hdparm_read_timings
+fi
+
 
 echo
 
